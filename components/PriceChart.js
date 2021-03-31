@@ -13,6 +13,8 @@ const PriceChart = () => {
   const {currency, currencies} = useBuySell();
   const [interval, setInterval] = useState('1d');
 
+  const chartRef = useRef(null);
+
   const [data, setData] = useState([]);
   const [percentageChange, setPercentageChange] = useState(0);
   const [change, setChange] = useState(0);
@@ -21,11 +23,13 @@ const PriceChart = () => {
 
   const getChartData = useRef(null);
   getChartData.current = async () => {
+    setLoading(true)
     const response = await (await fetch(`/api/price?currency=${currency.label}&period=${interval}`)).json();
-    setData(response.data);
     setChange(response.change);
     setLast(response.data[response.data.length-1][1])
     setPercentageChange(response.percentageChange);
+    setData(response.data);
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -87,7 +91,7 @@ const PriceChart = () => {
     },
   };
   return (
-    <div className='h-full align-middle'>
+    <div className={`h-full align-middle transition-all ${loading && 'opacity-50'}`}>
       <p>
         <span className='font-bold text-lg mr-2'>${numberSeparateComma(last)}</span>
         <span className={`font-bold text-sm 
@@ -95,7 +99,7 @@ const PriceChart = () => {
         ${direction(change) === 'decrease' && 'text-red-600'}
         ${direction(change) === 'same' && 'text-gray-600'}
         `}>{percentageChange}% (${numberSeparateComma(parseFloat(change.toFixed(2)))})</span></p>
-      <HighchartsReact
+      <HighchartsReact ref={chartRef}
         highcharts={Highcharts}
         options={options}
       />

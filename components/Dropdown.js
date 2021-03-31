@@ -23,7 +23,7 @@ const Dropdown = ({options, value, onChange, className, valueRenderer}) => {
       onClick={(e) => {onChange(e, v); setOpen(false)}} style={{width: wrapperRef.current?.offsetWidth}} 
       className="group relative inline-block rounded-sm bg-white hover:bg-gray-100 py-2 px-4 whitespace-no-wrap transition-all text-left focus:outline-none">
         {valueRenderer(v)}
-        <div className="opacity-0 w-28 bg-gray-900 bg-opacity-80 text-white text-center text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-100 -right-28 bottom-0 px-3 pointer-events-none">
+        <div className="opacity-0 w-28 bg-gray-900 bg-opacity-80 text-white text-center text-xs rounded-lg py-2 absolute z-10 md:group-hover:opacity-100 -right-28 bottom-0 px-3 pointer-events-none">
         {v.details}
         </div>
         </button>
