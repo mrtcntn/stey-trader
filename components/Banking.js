@@ -21,7 +21,7 @@ const BankingActivities = () => {
   ]
 
   return (
-    <div className='w-full mt-4 border rounded-md grid grid-cols-4 overflow-y-auto max-h-96'>
+    <div className='w-full mt-4 border rounded-md grid grid-cols-4 overflow-y-auto max-h-96 min-w-80 overflow-x-auto'>
       <div className='text-sm font-bold px-4 py-2'>Date</div>
       <div className='text-sm font-bold px-4 py-2'>Type</div>
       <div className='text-sm font-bold px-4 py-2'>Peer</div>
@@ -36,7 +36,7 @@ const BankingActivityRow = ({ type, peer, amount, date, className }) => {
     
     <div className='font-thin text-sm text-left px-4 py-2'><span>{date}</span></div>
     <div className='font-thin text-sm text-left px-4 py-2'><span>{type}</span></div>
-    <div className='font-thin text-sm text-right px-4 py-2 whitespace-nowrap'><span>{peer}</span></div>
+    <div className='font-thin text-sm px-4 py-2'><span>{peer}</span></div>
     <div className='font-thin text-sm text-right px-4 py-2'><span className={`font-bold ${type === 'Deposit' ? 'text-blue-400' : 'text-blue-700'}`}>${amount}</span></div>
   </div>
 }
